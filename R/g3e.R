@@ -1,5 +1,34 @@
+#%%%%%%%%%%%%%%%%%%%%%%% Function to be Exported %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+#' @name g3e
+#'
+#' @title Generalized Expectile Estimating Equations
+#'
+#' @description \code{ge3} obtains the parameter estimates for generalized
+#'   expectile estimating equations for repeated measure data
+#'
+#' @param id 
+#' @param y 
+#' @param x 
+#' @param expectile 
+#' @param intercept 
+#' @param corstr 
+#' @param scaled 
+#'
+#' @return
+#' @export
+#'
+#@examples
 g3e <- function(id, y, x, expectile, intercept='FALSE', corstr, scaled){
 
+  ## remove NAs if exist
+  complete_index <- !is.na(y) 
+  id <- id[complete_index]
+  y  <- y[complete_index]
+  x  <- x[complete_index, ]
+  
+  
   if (intercept == 'TRUE') x = cbind(1, x)
 
   ltps = split(1:length(id), id)
